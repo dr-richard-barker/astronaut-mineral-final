@@ -1,0 +1,15 @@
+metric,value
+n_i4_de_genes,20.0
+n_jaxa6_de_genes,243.0
+n_overlap_genes,16.0
+n_both_de,0.0
+sign_concordance_rate,0.6875
+sign_concordance_p,0.1050567626953125
+logFC_pearson_r,0.207923309485877
+logFC_pearson_p,0.43968121845921054
+logFC_spearman_rho,0.12058823529411765
+logFC_spearman_p,0.6564245147485953
+fisher_odds_ratio,0.0
+fisher_p,1.0
+n_meta_significant_fdr05,1.0
+n_ml_genes_in_jaxa_de,1.0

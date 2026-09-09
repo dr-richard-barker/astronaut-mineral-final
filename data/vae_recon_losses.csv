@@ -1,0 +1,8 @@
+fold,test_astronaut,vae_loss,n_train
+C001,C001,tensor(0.6896),18
+C002,C002,tensor(0.4537),18
+C003,C003,tensor(0.6595),18
+C004,C004,tensor(0.4691),18
+PS001,PS001,tensor(0.4248),19
+PS004,PS004,tensor(0.4381),19
+ALL,ALL,tensor(0.4580),22

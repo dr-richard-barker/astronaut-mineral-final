@@ -1,0 +1,39 @@
+{
+  "title": "Mineral-Pathway Transcriptional and Molecular Responses to Spaceflight: A Multi-Omics Analysis of Astronaut and Rodent Data",
+  "description": "Analysis pipeline, processed data, figures, and tables from mining NASA OSDR astronaut (Inspiration4) and rodent (Rodent Research) multi-omics data to identify mineral deficiencies linked to transcriptional and molecular responses to spaceflight. Includes RNA-seq, proteomics, metabolomics differential expression analysis, KEGG mineral-pathway gene sets, machine learning regression of serum mineral levels, cross-species concordance analysis, and systems biology atlas.",
+  "creators": [
+    {
+      "name": "Barker, Richard",
+      "affiliation": "Independent"
+    }
+  ],
+  "keywords": [
+    "spaceflight",
+    "mineral deficiency",
+    "multi-omics",
+    "transcriptomics",
+    "proteomics",
+    "metabolomics",
+    "KEGG pathways",
+    "NASA OSDR",
+    "Inspiration4",
+    "cross-species concordance",
+    "machine learning",
+    "mineral homeostasis"
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "upload_type": "software",
+  "publication_type": "article",
+  "prereserve_doi": true,
+  "communities": [
+    {"identifier": "nasa-osdr"}
+  ],
+  "related_identifiers": [
+    {"identifier": "OSD-569", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "OSD-570", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "OSD-571", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "OSD-575", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "OSD-47", "relation": "isDerivedFrom", "resource_type": "dataset"}
+  ]
+}

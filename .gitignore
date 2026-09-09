@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+__pycache__/
+.venv/
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.out
+.abai/

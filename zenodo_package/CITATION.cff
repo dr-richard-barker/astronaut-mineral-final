@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+title: "Mineral-Pathway Transcriptional and Molecular Responses to Spaceflight: A Multi-Omics Analysis of Astronaut and Rodent Data"
+message: "If you use this software or data, please cite it as below."
+type: software
+authors:
+  - given-names: Richard
+    family-names: Barker
+    email: rbarker@example.org
+preferred-citation:
+  type: article
+  title: "Mineral-Pathway Transcriptional and Molecular Responses to Spaceflight: A Multi-Omics Analysis of Astronaut and Rodent Data"
+  authors:
+    - given-names: Richard
+      family-names: Barker
+  journal: "npj Microgravity"
+  year: 2026
+  doi: "10.1038/s41526-2026-XXXXX"
+keywords:
+  - spaceflight
+  - mineral deficiency
+  - multi-omics
+  - transcriptomics
+  - proteomics
+  - KEGG pathways
+  - NASA OSDR
+  - Inspiration4
+  - cross-species
+  - machine learning
+license: MIT
+repository-code: "https://zenodo.org/record/XXXXXX"
+version: "1.0.0"
+date-released: "2026-08-30"
