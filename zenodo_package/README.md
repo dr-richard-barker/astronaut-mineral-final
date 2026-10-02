@@ -27,7 +27,7 @@ This package contains the complete analysis pipeline, processed data, figures, a
 
 1. **Mineral-pathway DE genes**: 46 significant mineral-pathway genes differentially expressed across RNA-seq and proteomics (|log2FC| > 0.5, p < 0.05)
 2. **Copper pathway dysregulation**: APP up-regulated, LOX/LOXL1 down-regulated in proteomics
-3. **Magnesium-binding proteins suppressed**: S100A8, S100A9, S100A12 down-regulated
+3. **Calcium-binding S100 proteins suppressed**: S100A8, S100A9, S100A12 down-regulated
 4. **Calcium channel alteration**: CACNA1D down-regulated (-2.14 log2FC) in RNA-seq
 5. **ML regression**: Mineral-pathway gene expression predicts serum potassium (r=0.50, R²=0.12) and sodium (r=0.46, R²=0.19) levels
 6. **Cross-species concordance**: No significant concordance between astronaut (3-day LEO) and rodent (21-day ISS) mineral-pathway responses (r=0.007)
