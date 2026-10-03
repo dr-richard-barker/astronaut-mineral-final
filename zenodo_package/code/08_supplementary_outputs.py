@@ -296,13 +296,24 @@ def plot_gsea_dotplot(gsea_results):
     term_order = mineral_terms + kegg_terms
     df['term_label'] = pd.Categorical(df['term_label'], categories=term_order, ordered=True)
 
+    # Place sets and comparisons at explicit integer positions. Passing strings to
+    # scatter() orders the axes by first appearance, which ignored term_order and
+    # left the separator and section labels pointing at the wrong columns.
+    # Sets dropped by GSEA's minimum-size filter are simply absent.
+    present = set(df['term_label'].astype(str))
+    terms = [t for t in term_order if t in present]
+    n_mineral = sum(t in mineral_terms for t in terms)
+    comps = [c for c in comp_order if c in set(df['comp_label'].astype(str))]
+    df['x'] = df['term_label'].astype(str).map({t: i for i, t in enumerate(terms)})
+    df['y'] = df['comp_label'].astype(str).map({c: i for i, c in enumerate(comps)})
+
     # Create figure
     fig, ax = plt.subplots(figsize=(10, 7))
 
     # Dot plot
     scatter = ax.scatter(
-        df['term_label'].astype(str).values,
-        df['comp_label'].astype(str).values,
+        df['x'].values,
+        df['y'].values,
         s=df['NES'].abs() * 40 + 20,  # dot size by |NES|
         c=df['neg_log10_fdr'].values,
         cmap='YlOrRd',
@@ -318,32 +329,33 @@ def plot_gsea_dotplot(gsea_results):
     # Add significance markers
     for _, row in df.iterrows():
         if pd.notna(row['FDR q-val']) and row['FDR q-val'] < 0.25:
-            ax.text(
-                str(row['term_label']),
-                str(row['comp_label']),
-                '*',
-                ha='center', va='center',
-                fontsize=8, fontweight='bold', color='black'
-            )
+            ax.text(row['x'], row['y'], '*', ha='center', va='center',
+                    fontsize=8, fontweight='bold', color='black')
+
+    ax.set_xticks(range(len(terms)))
+    ax.set_xticklabels(terms, rotation=45, ha='right', fontsize=9)
+    ax.set_yticks(range(len(comps)))
+    ax.set_yticklabels(comps, fontsize=9)
+    ax.set_xlim(-0.6, len(terms) - 0.4)
+    ax.set_ylim(-0.6, len(comps) - 0.4)
 
     ax.set_xlabel('Gene Set', fontsize=11)
     ax.set_ylabel('Comparison', fontsize=11)
     ax.set_title('GSEA: Mineral Pathway Enrichment Across Spaceflight Recovery',
-                 fontsize=12, fontweight='bold', pad=12)
+                 fontsize=12, fontweight='bold', pad=22)
 
-    # Rotate x labels
-    plt.xticks(rotation=45, ha='right', fontsize=9)
-    plt.yticks(fontsize=9)
+    # Line between RNA-seq and Proteomics rows
+    n_rna = sum(c.startswith('RNA-seq') for c in comps)
+    if 0 < n_rna < len(comps):
+        ax.axhline(y=n_rna - 0.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
 
-    # Add horizontal line between RNA-seq and Proteomics
-    ax.axhline(y=2.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-
-    # Add vertical line between mineral and KEGG sets
-    ax.axvline(x=9.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
-
-    # Add section labels
-    ax.text(4, -0.8, 'Mineral-specific', ha='center', fontsize=8, style='italic', color='gray')
-    ax.text(12, -0.8, 'KEGG Pathway', ha='center', fontsize=8, style='italic', color='gray')
+    # Line between mineral and KEGG sets, with section labels above the plot
+    ax.axvline(x=n_mineral - 0.5, color='gray', linestyle='--', linewidth=0.8, alpha=0.5)
+    top = ax.get_xaxis_transform()
+    ax.text((n_mineral - 1) / 2, 1.01, 'Mineral-specific', transform=top, ha='center', va='bottom',
+            fontsize=8, style='italic', color='gray')
+    ax.text((n_mineral + len(terms) - 1) / 2, 1.01, 'KEGG Pathway', transform=top, ha='center', va='bottom',
+            fontsize=8, style='italic', color='gray')
 
     plt.tight_layout()
 

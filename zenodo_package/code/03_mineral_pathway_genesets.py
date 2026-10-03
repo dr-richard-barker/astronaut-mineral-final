@@ -61,6 +61,9 @@ CURATED_MINERAL_GENES = {
         # S100 proteins are EF-hand Ca2+-binding proteins (moved from Magnesium)
         "S100A1", "S100A2", "S100A4", "S100A6", "S100A8", "S100A9",
         "S100A10", "S100A11", "S100A12", "S100B",
+        # EF-hand Ca2+ buffers/sensors (UniProt ligand: Ca2+ only; moved from Magnesium).
+        # HPCAL2, also listed there, is not an HGNC symbol and was always filtered out.
+        "PVALB", "CALB1", "CALB2", "HPCA", "HPCAL1",
     ],
     "Zinc": [
         "MT1A", "MT1B", "MT1E", "MT1F", "MT1G", "MT1H", "MT1M", "MT1X", "MT2A",
@@ -86,7 +89,6 @@ CURATED_MINERAL_GENES = {
         "TRPM6", "TRPM7", "CNNM1", "CNNM2", "CNNM3", "CNNM4",
         "SLC41A1", "SLC41A2", "SLC41A3", "MAGT1", "NIPA1", "NIPA2", "NIPAL1",
         "CAMLG",
-        "PVALB", "CALB1", "CALB2", "HPCAL1", "HPCAL2", "HPCA",
     ],
     "Potassium": [
         "KCNMA1", "KCNMB1", "KCNMB2", "KCNMB3", "KCNMB4",

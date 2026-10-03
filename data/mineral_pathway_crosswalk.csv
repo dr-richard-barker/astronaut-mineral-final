@@ -129,8 +129,8 @@ CACNA1G,Calcium,hsa04020:Calcium_signaling,1,1
 CACNA1H,Calcium,hsa04020:Calcium_signaling,1,1
 CACNA1I,Calcium,hsa04020:Calcium_signaling,1,1
 CACNA1S,Calcium,hsa04020:Calcium_signaling,1,1
-CALB1,Magnesium,,1,0
-CALB2,Magnesium,,1,0
+CALB1,Calcium,,1,0
+CALB2,Calcium,,1,0
 CALCA,Calcium,,1,0
 CALCB,Calcium,,1,0
 CALCR,Calcium,,1,0
@@ -306,8 +306,8 @@ HJV,Iron,,1,0
 HMGCR,,hsa04976:Bile_secretion,0,1
 HMOX1,,hsa04216:Ferroptosis;hsa04978:Mineral_absorption,0,2
 HMOX2,,hsa04978:Mineral_absorption,0,1
-HPCA,Magnesium,,1,0
-HPCAL1,Magnesium,,1,0
+HPCA,Calcium,,1,0
+HPCAL1,Calcium,,1,0
 HRC,,hsa04020:Calcium_signaling,0,1
 HRH1,,hsa04020:Calcium_signaling,0,1
 HRH2,,hsa04020:Calcium_signaling,0,1
@@ -563,7 +563,7 @@ PTH1R,Calcium,,1,0
 PTH2R,Calcium,,1,0
 PTHLH,Calcium,,1,0
 PTK2B,,hsa04020:Calcium_signaling,0,1
-PVALB,Magnesium,,1,0
+PVALB,Calcium,,1,0
 RET,,hsa04020:Calcium_signaling,0,1
 RUNX2,Calcium,,1,0
 RXRA,,hsa04976:Bile_secretion,0,1
