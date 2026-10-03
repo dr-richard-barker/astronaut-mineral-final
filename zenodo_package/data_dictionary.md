@@ -96,3 +96,12 @@
 | `fig7_mineral_trajectories.svg` | Serum mineral trajectories over time |
 | `fig8_systems_biology_atlas.svg` | Composite systems biology atlas (5 panels) |
 | `fig9_pathway_expression_summary.svg` | Per-pathway gene expression summary |
+| `fig1_heatmap_mineral_de.png`, `fig2_volcano_rnaseq.png`, `fig3_barplot_importance.png`, `fig8_systems_biology_atlas.png` | PNG renders of the figures above, as included in `main_integrated.tex` |
+| `dl_iron_reference_panel.png` | NHANES reference distributions of serum iron, ferritin and transferrin saturation (age 40–60) |
+| `dl_iron_cbc_correlation_heatmap.png` | Pearson correlations between four iron status markers and six CBC parameters (NHANES) |
+| `dl_extended_auc_comparison.png` | Pooled leave-one-astronaut-out AUC, flight vs pre-flight, across 7 feature spaces |
+| `dl_extended_roc_overlay.png` | ROC curves for the best classifier per architecture, including ensembles |
+| `dl_extended_regression_comparison.png` | Best \|r\| for mineral regression per architecture (I4 only) |
+| `dl_extended_umap_comparison.png` | UMAP of the DAE, VAE and FT-Transformer 16-dimensional latent spaces |
+| `dl_latent_correlation_heatmap.png` | Pairwise correlations between DAE, VAE and FT-Transformer latent dimensions |
+| `dl_per_astronaut_auc.png` | Per-astronaut leave-one-out AUC for the best classifier per feature space |

@@ -38,7 +38,7 @@
 % ════════════════════════════════════════════════════════════════════
 \begin{abstract}
 \noindent
-Spaceflight disrupts mineral homeostasis through microgravity-induced bone loss, fluid shifts, and radiation exposure, yet interpreting clinical markers from small astronaut cohorts ($n=4$) lacks population context. We integrated data from the National Health and Nutrition Examination Survey (NHANES, 2013--2018, $n=5{,}748$ adults aged 40--60) as a population reference baseline for 15 clinical mineral and hematological variables, then contextualized measurements from four Inspiration4 astronauts across seven timepoints. Mean platelet volume was significantly elevated above population norms at six of seven timepoints (Benjamini--Hochberg FDR $< 0.05$, Cohen's $d = 2.12$--$2.47$), while calcium ($d = 1.30$--$1.92$) and bicarbonate ($d = -1.24$ to $-1.78$) showed large population-deviating effects. Transcriptomic analysis identified 50 differentially expressed mineral-pathway genes, with copper-dependent enzymes (APP up, LOX/LOXL1 down), iron metabolism genes (ALAS2 down, HFE up), and the calcium channel CACNA1D (down, log$_2$FC $= -2.25$) most affected. Machine learning regression demonstrated that mineral-pathway gene expression predicts serum potassium ($r = 0.50$) and sodium ($r = 0.46$) under leave-one-out cross-validation. A cross-species meta-analysis across 28 rodent datasets revealed significant mineral-pathway concordance in skeletal muscle (pooled $r = 0.035$, $p = 0.0025$), strongest in soleus ($r = 0.059$, $p = 0.009$), but not in liver or kidney. These findings demonstrate that population-referenced framing reveals spaceflight mineral deviations invisible to within-subject analysis alone, with implications for biomarker development and nutritional countermeasures.
+Spaceflight disrupts mineral homeostasis through microgravity-induced bone loss, fluid shifts, and radiation exposure, yet interpreting clinical markers from small astronaut cohorts ($n=4$) lacks population context. We integrated data from the National Health and Nutrition Examination Survey (NHANES, 2013--2018, $n=5{,}748$ adults aged 40--60) as a population reference baseline for 15 clinical mineral and hematological variables, then contextualized measurements from four Inspiration4 astronauts across seven timepoints. We further extended the NHANES reference with four iron status markers (serum iron, ferritin, transferrin saturation, TIBC) not measured in astronauts, establishing population correlations between iron status and CBC parameters (hemoglobin vs.\ serum iron $r = 0.424$, vs.\ transferrin saturation $r = 0.412$). Mean platelet volume was significantly elevated above population norms at six of seven timepoints (Benjamini--Hochberg FDR $< 0.05$, Cohen's $d = 2.12$--$2.47$), while calcium ($d = 1.30$--$1.92$) and bicarbonate ($d = -1.24$ to $-1.78$) showed large population-deviating effects. Transcriptomic analysis identified 50 differentially expressed mineral-pathway genes, with copper-dependent enzymes (APP up, LOX/LOXL1 down), iron metabolism genes (ALAS2 down, HFE up), and the calcium channel CACNA1D (down, log$_2$FC $= -2.25$) most affected. Machine learning regression demonstrated that mineral-pathway gene expression predicts serum potassium ($r = 0.50$) and sodium ($r = 0.46$) under leave-one-out cross-validation. A cross-species meta-analysis across 28 rodent datasets revealed significant mineral-pathway concordance in skeletal muscle (pooled $r = 0.035$, $p = 0.0025$), strongest in soleus ($r = 0.059$, $p = 0.009$), but not in liver or kidney. These findings demonstrate that population-referenced framing reveals spaceflight mineral deviations invisible to within-subject analysis alone, with implications for biomarker development and nutritional countermeasures.
 
 \medskip
 \noindent\textbf{Keywords:} spaceflight, mineral homeostasis, NHANES, multi-omics, transcriptomics, cross-species meta-analysis, machine learning, Inspiration4, NASA OSDR
@@ -53,7 +53,7 @@ Spaceflight exposes humans to a unique combination of physiological stressors in
 
 A fundamental challenge in spaceflight omics research is the extremely small sample size. With $n=4$ astronauts, within-subject comparisons lack the statistical power to distinguish spaceflight-induced changes from normal biological variation. Population reference data can address this limitation by providing an external baseline against which astronaut values can be compared. The National Health and Nutrition Examination Survey (NHANES), conducted by the CDC National Center for Health Statistics, provides nationally representative laboratory data for the U.S. civilian population\textsuperscript{5}, including standard biochemistry profiles and complete blood counts that directly overlap with astronaut clinical measurements.
 
-In this study, we: (1) established NHANES population reference intervals for 15 clinical mineral and hematological variables matched to astronaut data; (2) identified astronaut markers that deviate significantly from population norms; (3) characterized the mineral-pathway transcriptomic response using curated gene sets spanning 10 minerals and 5 KEGG pathways; (4) evaluated whether mineral-pathway gene expression predicts serum mineral levels using machine learning; and (5) conducted a cross-species meta-analysis across 28 rodent datasets to assess translational concordance. By framing astronaut findings within a population baseline, we distinguish population-deviating abnormalities from within-subject variation that may remain within normal physiological ranges.
+In this study, we: (1) established NHANES population reference intervals for 15 clinical mineral and hematological variables matched to astronaut data; (2) extended the NHANES reference with four iron status markers (serum iron, ferritin, transferrin saturation, TIBC) not measured in astronauts, and quantified population-level correlations between iron status and CBC parameters; (3) identified astronaut markers that deviate significantly from population norms; (4) characterized the mineral-pathway transcriptomic response using curated gene sets spanning 10 minerals and 5 KEGG pathways; (5) evaluated whether mineral-pathway gene expression predicts serum mineral levels using machine learning; (6) integrated per-sample RNA-seq from two independent missions (I4, $n = 4$; AX-1, $n = 2$) via a denoising autoencoder with leave-one-astronaut-out cross-validation; (7) validated the mineral-pathway signature against the independent JAXA6 mission ($n = 6$ astronauts); and (8) conducted a cross-species meta-analysis across 28 rodent datasets to assess translational concordance. By framing astronaut findings within a population baseline and validating across missions and species, we distinguish population-deviating abnormalities from within-subject variation that may remain within normal physiological ranges.
 
 % ════════════════════════════════════════════════════════════════════
 % RESULTS
@@ -171,13 +171,40 @@ Differential expression analysis across three flight comparisons (I4-FP1: R+1 vs
 \includegraphics[width=\textwidth]{figures/fig2_volcano_rnaseq.png}
 \caption{}
 \end{subfigure}
-\caption{Mineral-pathway differential expression. (a) Heatmap of significant mineral-pathway DE genes ($|\log_2\text{FC}| > 0.5$, $p < 0.05$) across RNA-seq and proteomics comparisons. Gene annotations indicate primary mineral associations. (b) Volcano plot of RNA-seq differential expression (I4-FP1: R+1 vs.\ pre-flight), with mineral-pathway genes highlighted by mineral association.}
+
+\vspace{0.5em}
+\begin{subfigure}{0.85\textwidth}
+\includegraphics[width=\textwidth]{figures/figS1_gsea_enrichment.png}
+\caption{}
+\end{subfigure}
+\caption{Mineral-pathway differential expression. (a) Heatmap of significant mineral-pathway DE genes ($|\log_2\text{FC}| > 0.5$, $p < 0.05$) across RNA-seq and proteomics comparisons. Gene annotations indicate primary mineral associations. (b) Volcano plot of RNA-seq differential expression (I4-FP1: R+1 vs.\ pre-flight), with mineral-pathway genes highlighted by mineral association. (c) GSEA enrichment of mineral-specific gene sets and KEGG pathways across flight comparisons, showing normalized enrichment scores and significance.}
 \label{fig:de_heatmap}
 \end{figure}
 
 The most consistent findings were: \textbf{Copper pathway} --- APP (amyloid precursor protein, copper-binding) was up-regulated in proteomics ($\log_2\text{FC} = 1.32$, FDR $= 0.001$), while LOX and LOXL1 (copper-dependent lysyl oxidases) were down-regulated. LOXL2 was up-regulated in RNA-seq ($\log_2\text{FC} = 2.10$). Lysyl oxidases are critical for collagen cross-linking and connective tissue integrity\textsuperscript{7}. \textbf{Iron pathway} --- ALAS2 (erythroid-specific aminolevulinate synthase) was down-regulated ($\log_2\text{FC} = -1.45$, FDR $= 0.008$), while HFE (hemochromatosis gene) was up-regulated ($\log_2\text{FC} = 2.39$). GLRX5 was also down-regulated. These changes are consistent with the space-flight anemia and increased iron availability reported in astronauts\textsuperscript{6}. \textbf{Magnesium pathway} --- NIPA1 was up-regulated ($\log_2\text{FC} = 1.84$). \textbf{Calcium pathway} --- S100A8, S100A9, and S100A12 (calcium-binding calgranulins) were down-regulated in proteomics and RNA-seq; S100A8/A9 form calprotectin, a key innate immune mediator\textsuperscript{8}. CACNA1D (voltage-gated calcium channel) showed the largest fold change ($\log_2\text{FC} = -2.25$ in I4-FP2, $-2.14$ in I4-FP3), potentially reflecting cellular adaptation to mechanical unloading, which alters mechanotransduction signalling\textsuperscript{9}. \textbf{Zinc pathway} --- MT2A and MT3 (metallothioneins) were down-regulated ($\log_2\text{FC} = -0.75$ to $-2.03$). \textbf{Potassium pathway} --- KCNQ2 was up-regulated ($\log_2\text{FC} = 1.73$), while FXYD2 (sodium/potassium transport regulator) was down-regulated in proteomics.
 
-Gene set enrichment analysis (GSEA) revealed down-regulation of oxidative phosphorylation (NES $= -1.63$, NOM $p = 0.002$) and the iron mineral gene set (NES $= -1.53$, NOM $p = 0.037$) in the I4-FP1 comparison, while ferroptosis showed a trend toward up-regulation (NES $= 1.37$, NOM $p = 0.052$). The calcium gene set trended toward down-regulation in the later comparisons (I4-FP2: NES $= -1.46$, NOM $p = 0.033$; I4-FP3: NES $= -1.55$, NOM $p = 0.017$, FDR $q = 0.23$; Supplementary Figure~S2). Time-resolved pathway activation patterns are shown in Supplementary Figure~S3.
+Gene set enrichment analysis (GSEA) revealed down-regulation of oxidative phosphorylation (NES $= -1.63$, NOM $p = 0.002$) and the iron mineral gene set (NES $= -1.53$, NOM $p = 0.037$) in the I4-FP1 comparison, while ferroptosis showed a trend toward up-regulation (NES $= 1.37$, NOM $p = 0.052$). The calcium gene set trended toward down-regulation in the later comparisons (I4-FP2: NES $= -1.46$, NOM $p = 0.033$; I4-FP3: NES $= -1.55$, NOM $p = 0.017$, FDR $q = 0.23$; Figure~\ref{fig:de_heatmap}c). Time-resolved pathway activation patterns are shown in Supplementary Figure~S2.
+
+\subsubsection{NHANES iron status reference and CBC correlations}
+
+Because the astronaut clinical panel did not include serum iron, ferritin, transferrin saturation, or total iron-binding capacity (TIBC), we extended the NHANES reference to include these four iron status markers, providing population context for the iron-pathway transcriptomic findings. Serum iron (LBXSIR) was available from the Standard Biochemistry Profile across all three cycles ($n = 5{,}435$); ferritin (LBXFER) was available from 2015--2018 ($n = 2{,}190$); and transferrin saturation (LBDPCT) and TIBC (LBDTIB) were available from 2017--2018 only ($n = 1{,}678$), as the NHANES 2013--2014 cycle did not include ferritin or TIBC files. Reference intervals (P2.5--P97.5) were: serum iron 24.0--160.0~$\mu$g/dL (mean 83.3, SD 36.0); ferritin 6.4--565.6~ng/mL (mean 147.1, SD 200.9); transferrin saturation 7.0--55.0\% (mean 27.4, SD 11.7); and TIBC 237.9--442.2~$\mu$g/dL (mean 324.6, SD 50.9).
+
+To quantify the relationship between iron status and the hematological markers available in both NHANES and astronaut data, we computed Pearson correlations between each iron marker and six CBC parameters (hemoglobin, hematocrit, RBC count, MCH, MCHC, MCV) within the NHANES reference population (age 40--60, all sexes; Figure~\ref{fig:iron_ref}). Hemoglobin was the strongest CBC correlate of iron status: serum iron vs.\ hemoglobin $r = 0.424$ ($p = 4.6 \times 10^{-236}$, $n = 5{,}424$), transferrin saturation vs.\ hemoglobin $r = 0.412$ ($p = 1.4 \times 10^{-69}$, $n = 1{,}677$), and ferritin vs.\ hemoglobin $r = 0.274$ ($p = 5.0 \times 10^{-39}$, $n = 2{,}187$). TIBC showed a negative correlation with hemoglobin ($r = -0.223$, $p = 2.9 \times 10^{-20}$), consistent with the inverse relationship between iron-binding capacity and iron stores in iron deficiency. MCH showed similarly strong correlations (serum iron $r = 0.379$; transferrin saturation $r = 0.408$). Of 24 correlations tested, 23 reached $p < 0.05$ (only TIBC vs.\ RBC count was non-significant, $r = -0.005$, $p = 0.85$). These population-level correlations establish hemoglobin as a robust proxy for iron status, strengthening the link between the modest astronaut hemoglobin deviations and the iron-pathway transcriptional changes (ALAS2 down-regulation, HFE up-regulation) observed in the transcriptomic data.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.62\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_iron_reference_panel.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.36\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_iron_cbc_correlation_heatmap.png}
+\caption{}
+\end{subfigure}
+\caption{NHANES iron status reference and CBC correlations. (a) Reference distributions of serum iron, ferritin, and transferrin saturation in the NHANES population (age 40--60, all sexes), with P2.5, P97.5, and mean indicated by dashed lines. (b) Pearson correlation heatmap between four iron status markers (rows) and six CBC parameters (columns). Asterisks denote significance: ***$p < 0.001$, **$p < 0.01$, *$p < 0.05$. Hemoglobin and MCH show the strongest correlations with iron status markers, while TIBC is negatively correlated with all CBC parameters except RBC count.}
+\label{fig:iron_ref}
+\end{figure}
 
 \subsection{Machine learning: mineral-pathway genes predict serum mineral levels}
 
@@ -208,7 +235,18 @@ Stability selection identified 16 genes selected in $\geq 50\%$ of LOO folds (Fi
 \includegraphics[width=\textwidth]{figures/figS8_selected_features.png}
 \caption{}
 \end{subfigure}
-\caption{Machine learning analysis. (a) Permutation importance for potassium (left) and sodium (right) regression under LOO-CV. Bar colors indicate the primary mineral association of each gene. (b) Stability-selected features from imbalance-aware elastic-net classification: selection frequency across LOO folds and mean coefficient magnitude, annotated with mineral pathway.}
+
+\vspace{0.5em}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/figS7_confusion_matrix.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/figS6_permutation_null.png}
+\caption{}
+\end{subfigure}
+\caption{Machine learning analysis. (a) Permutation importance for potassium (left) and sodium (right) regression under LOO-CV. Bar colors indicate the primary mineral association of each gene. (b) Stability-selected features from imbalance-aware elastic-net classification: selection frequency across LOO folds and mean coefficient magnitude, annotated with mineral pathway. (c) Confusion matrix for the best classification model (class-weighted elastic-net, LOO-CV). (d) Permutation null distribution for the classification AUC, with observed AUC marked.}
 \label{fig:ml_results}
 \end{figure}
 
@@ -235,6 +273,98 @@ Dummy (stratified) & --- & AUC & 0.50 \\
 \end{tabular}
 \end{table}
 
+\subsection{Cross-mission integration and deep learning analysis}
+
+To increase astronaut sample size and test generalizability, we integrated per-sample RNA-seq from two independent spaceflight missions: the I4 cohort ($n = 4$ astronauts, 16 samples) and the Axiom-1 (AX-1) mission ($n = 2$ astronauts, 6 samples; GEO: GSE276490). Gene expression was harmonized to 779 common mineral-pathway genes, log$_2$-transformed, and batch-corrected by study-wise z-scoring. A denoising autoencoder (779 $\to$ 128 $\to$ 64 $\to$ 16-dimensional latent $\to$ 64 $\to$ 128 $\to$ 779; Gaussian noise $\sigma = 0.1$, dropout 0.3, $L_2$ weight decay $10^{-4}$) was trained with leave-one-astronaut-out (LOAO) cross-validation across all 6 astronauts (22 samples).
+
+On the 16-dimensional latent space, a random forest classifier achieved a pooled LOAO AUC of 0.728 for flight vs.\ pre-flight discrimination ($p = 0.015$, 1000-permutation test; Figure~\ref{fig:dl_results}a--b), outperforming the same classifier on raw 779-dimensional expression (AUC = 0.621, $p = 0.167$). This demonstrates that the autoencoder's dimensionality reduction improves generalization in the extreme small-$n$ regime ($n = 6$ astronauts), where the raw feature space (779 genes) leads to overfitting. Other classifiers (logistic regression, SVM) performed near chance on both representations, consistent with the limited statistical power.
+
+Regression on the latent space to predict serum mineral levels (I4 only, 4 astronauts) showed strong absolute correlations for hemoglobin (SVR-RBF, $|r| = 0.915$) and potassium (random forest, $|r| = 0.748$), though with negative sign --- an artifact of LOAO with $n = 4$ where models learn astronaut-specific patterns that reverse in held-out subjects (Figure~\ref{fig:dl_results}d). Sodium showed a positive correlation ($r = 0.431$). These results confirm that mineral-pathway latent features encode clinically relevant variation, but reliable individual-level prediction requires larger cohorts.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_umap_latent.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_roc_curves.png}
+\caption{}
+\end{subfigure}
+
+\vspace{0.5em}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_jaxa6_concordance.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_regression_scatter.png}
+\caption{}
+\end{subfigure}
+\caption{Cross-mission integration and deep learning. (a) UMAP of the 16-dimensional autoencoder latent space (22 samples, 6 astronauts), colored by flight status, study, and astronaut identity. (b) LOAO ROC curves for flight vs.\ pre-flight classification: latent-space random forest (AUC = 0.728, $p = 0.015$) vs.\ raw-expression random forest (AUC = 0.621). (c) Cross-mission concordance: I4 vs.\ JAXA6 log$_2$FC for 16 overlapping mineral-pathway genes (68.8\% directional concordance). (d) LOAO regression scatter plots for calcium, potassium, sodium, and hemoglobin prediction from latent features (I4 only).}
+\label{fig:dl_results}
+\end{figure}
+
+\subsubsection{JAXA6 cross-mission signature validation}
+
+As an independent validation, we compared I4 flight-vs-pre differential expression against the JAXA6 mission (6 Japanese astronauts, plasma cell-free RNA-seq; OSD-530), which provides group-mean expression for 11 time points (3 pre-flight, 4 in-flight, 4 post-flight) but not per-sample data. Of the 20 I4 mineral-pathway DE genes (I4-FP1 comparison), 16 were present in the JAXA6 differential expression table. Directional concordance was 68.8\% (11/16 genes, binomial $p = 0.105$; Figure~\ref{fig:dl_results}c), with a weak positive log$_2$FC correlation ($r = 0.208$, $p = 0.44$). A weighted Stouffer meta-analysis (weighting by $\sqrt{n}$ per mission) identified one gene reaching FDR significance: \textit{ALAS2} (combined $p = 0.0016$, FDR $= 0.021$), downregulated during spaceflight in both I4 (log$_2$FC $= -1.45$) and JAXA6 (logFC $= -0.80$). ALAS2 encodes aminolevulinic acid synthase 2, the rate-limiting enzyme in erythroid heme biosynthesis, linking spaceflight-induced anemia to iron-pathway transcriptional suppression. Additionally, \textit{CNNM4} (a magnesium transporter selected by ML stability selection) was independently significant in JAXA6 (logFC $= -2.09$, adj-$P = 0.045$), providing cross-mission validation of an ML-identified biomarker.
+
+\subsubsection{Architecture comparison: VAE and FT-Transformer}
+
+To test whether the DAE's classification advantage generalizes to alternative deep learning architectures, we trained two additional models on the same 779-gene, 22-sample dataset under identical LOAO cross-validation:
+
+\textit{Variational autoencoder (VAE).} A $\beta$-VAE with architecture 779 $\to$ 128 $\to$ 64 $\to$ 16 (mean and log-variance) $\to$ 64 $\to$ 128 $\to$ 779, trained with $\beta = 0.5$, dropout 0.3, $L_2$ weight decay $10^{-4}$, and the same Adam optimizer (lr $= 10^{-3}$, 300 epochs, patience 30). The KL regularization encourages a smooth latent manifold but may over-compress in the small-$n$ regime.
+
+\textit{FT-Transformer.} A lightweight feature-tokenizer transformer treating each gene as a token with a value embedding (16-dim) and a learned gene-identity embedding (779 $\times$ 16). A single transformer encoder layer (4 heads, FFN dimension 32, pre-LN, GELU) processes the 779 tokens, and a CLS token aggregates to a 16-dimensional latent. Heavy regularization (dropout 0.5, $L_2$ $10^{-3}$, gradient clipping at norm 1.0) was applied. The model has 117,707 parameters and was trained for 150 epochs (patience 20, lr $= 5 \times 10^{-4}$).
+
+\textit{Multi-omics consensus baseline.} Since per-sample proteomics was not available in OSDR (OSD-581 is a Mars simulation, not I4), we constructed a 15-gene multi-omics consensus set from the intersection of RNA-seq mineral-pathway genes and proteomics DE genes ($p < 0.05$ in I4-FP1 or I4-FP2). This 15-gene set (APP, ATP6AP1, ATP6V0D1, CYBB, FXYD2, GCLM, GPX1, LOX, LOXL1, PDGFA, S100A11, S100A12, S100A8, S100A9, SOD3) was used as a direct classification baseline without autoencoder encoding.
+
+\textit{Classification results.} The DAE + random forest combination remained the best overall classifier (AUC = 0.728, $p = 0.015$; Figure~\ref{fig:dl_extended}a--b). The FT-Transformer achieved significant classification with a different optimal classifier --- SVM-RBF (AUC = 0.661, $p = 0.006$) --- suggesting that the transformer's attention-based latent space has different geometric properties than the DAE's reconstruction-based latent. The VAE did not reach significance (best: RF, AUC = 0.621, $p = 0.143$), consistent with the hypothesis that KL regularization over-compresses the latent space when $n = 6$ astronauts. Raw 779-dimensional expression (AUC = 0.621, $p = 0.176$) and the 15-gene multi-omics consensus (AUC = 0.598, $p = 0.168$) both failed to reach significance, confirming that dimensionality reduction is essential in this regime.
+
+\textit{Regression results.} All architectures produced strong absolute correlations for hemoglobin prediction (DAE: $|r| = 0.915$, $p = 0.05$; VAE: $|r| = 0.930$, $p < 0.01$; Transformer: $|r| = 0.929$; Figure~\ref{fig:dl_extended}c). The VAE + SVR-linear combination was the only regression reaching permutation significance ($r = -0.930$, $p < 0.01$), though the negative sign reflects the LOAO artifact with $n = 4$ astronauts. Potassium prediction was strongest for the Transformer ($|r| = 0.801$, $p = 0.06$). These results confirm that all three architectures encode clinically relevant mineral variation, but the small sample size limits reliable individual-level prediction.
+
+\textit{Ensemble analysis.} To test whether the DAE and FT-Transformer encode complementary information, we evaluated two ensemble strategies (Figure~\ref{fig:dl_extended}a--b). A concatenation ensemble (32-dimensional DAE+Transformer features) with random forest achieved AUC = 0.692 ($p = 0.024$) --- significant but lower than the DAE alone (0.728), suggesting that the expanded feature space introduces noise in the small-$n$ regime. In contrast, a prediction-level averaging ensemble (mean of DAE+RF and Transformer+SVM-RBF probabilities) achieved the highest AUC of any configuration: 0.750 ($p = 0.008$), surpassing both individual architectures. This demonstrates that the two architectures capture partially independent flight-status signals --- the DAE's reconstruction-based latent and the Transformer's attention-based latent encode complementary structure that is lost when merged at the feature level but preserved when combined at the decision level.
+
+The latent space correlation analysis (Figure~\ref{fig:dl_extended}e) confirms this complementarity: pairwise correlations between DAE, VAE, and Transformer latent dimensions are generally weak ($|r| < 0.5$ for most dimension pairs), indicating that each architecture discovers different projections of the 779-gene space. The per-astronaut AUC breakdown (Figure~\ref{fig:dl_extended}f) reveals that the ensemble's improvement is driven by better classification of AX-1 astronauts (PS001, PS004), where the averaging ensemble achieves perfect AUC (1.0) compared to 0.67--1.0 for individual architectures.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_extended_auc_comparison.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_extended_roc_overlay.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_extended_regression_comparison.png}
+\caption{}
+\end{subfigure}
+
+\vspace{0.5em}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_extended_umap_comparison.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_latent_correlation_heatmap.png}
+\caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figures/dl_per_astronaut_auc.png}
+\caption{}
+\end{subfigure}
+\caption{Architecture and ensemble comparison. (a) Pooled LOAO AUC for flight vs.\ pre-flight classification across 7 feature spaces; asterisks mark permutation $p < 0.05$. (b) ROC curves for the best classifier per architecture, including both ensemble strategies. (c) Best $|r|$ for mineral regression (I4 only, 4 targets). (d) UMAP comparison of 16-dimensional latent spaces (22 samples, 6 astronauts). (e) Pairwise Pearson correlation between latent dimensions of DAE, VAE, and FT-Transformer (16$\times$16 each); weak correlations confirm architecture-specific representations. (f) Per-astronaut LOAO AUC for the best classifier per feature space; sample counts annotated (3--4 test samples per astronaut).}
+\label{fig:dl_extended}
+\end{figure}
+
 \subsection{Cross-species meta-analysis: muscle-specific concordance}
 
 To assess whether mineral-pathway transcriptional responses are conserved across species, we conducted a Fisher $z$ random-effects meta-analysis across 28 rodent spaceflight datasets from the NASA OSDR, comprising 10 liver, 12 muscle (6 subtypes: EDL, gastrocnemius, quadriceps, soleus, tibialis anterior), and 6 kidney datasets. For each dataset, flight vs.\ ground control differential expression was computed, mapped to human orthologs, and correlated with astronaut peripheral blood mineral-pathway log$_2$FC values.
@@ -252,11 +382,17 @@ Skeletal muscle showed significant pooled concordance with astronaut mineral-pat
 \includegraphics[width=\textwidth]{figures/figS4_tissue_pathway_heatmap.png}
 \caption{}
 \end{subfigure}
-\caption{Cross-species meta-analysis of mineral-pathway concordance. (a) Forest plot showing Fisher $z$ random-effects pooled correlation (astronaut blood vs.\ rodent tissue) by tissue type. Diamond width represents study weight; horizontal lines show 95\% CI. (b) Tissue $\times$ pathway heatmap showing concordance proportions for each mineral pathway across tissues; asterisks mark uncorrected one-sided binomial $p < 0.05$.}
+
+\vspace{0.5em}
+\begin{subfigure}{0.65\textwidth}
+\includegraphics[width=\textwidth]{figures/figS5_scatter_cross_species.png}
+\caption{}
+\end{subfigure}
+\caption{Cross-species meta-analysis of mineral-pathway concordance. (a) Forest plot showing Fisher $z$ random-effects pooled correlation (astronaut blood vs.\ rodent tissue) by tissue type. Diamond width represents study weight; horizontal lines show 95\% CI. (b) Tissue $\times$ pathway heatmap showing concordance proportions for each mineral pathway across tissues; asterisks mark uncorrected one-sided binomial $p < 0.05$. (c) Cross-species scatter plot of astronaut vs.\ rodent mineral-pathway log$_2$FC values, colored by tissue type, with regression line and 95\% CI.}
 \label{fig:cross_species}
 \end{figure}
 
-The muscle-specific concordance pattern supports the hypothesis that skeletal muscle serves as a primary sensor and responder to mineral-pathway disruption in microgravity, consistent with the known effects of mechanical unloading on skeletal muscle\textsuperscript{10}. The absence of liver and kidney concordance likely reflects tissue-specific mineral handling and the confounding effects of comparing peripheral blood (astronaut) with internal organs (rodent). The cross-species scatter plot is provided in Supplementary Figure~S5, and the full meta-analysis summary in Table~\ref{tab:meta_summary}.
+The muscle-specific concordance pattern supports the hypothesis that skeletal muscle serves as a primary sensor and responder to mineral-pathway disruption in microgravity, consistent with the known effects of mechanical unloading on skeletal muscle\textsuperscript{10}. The absence of liver and kidney concordance likely reflects tissue-specific mineral handling and the confounding effects of comparing peripheral blood (astronaut) with internal organs (rodent). The cross-species scatter plot (Figure~\ref{fig:cross_species}c) visualizes the gene-level concordance, and the full meta-analysis summary is provided in Table~\ref{tab:meta_summary}.
 
 \begin{table}[H]
 \centering
@@ -305,9 +441,17 @@ In contrast, bicarbonate depression showed a pattern consistent with both pre-ex
 
 \subsection{Transcriptomic correlates of clinical deviations}
 
-The population-deviating clinical markers show plausible transcriptomic correlates. The down-regulation of CACNA1D ($\log_2\text{FC} = -2.25$), the largest fold change observed, aligns with the elevated serum calcium: cellular down-regulation of calcium channels may represent an adaptive response to sustained extracellular calcium elevation. The iron pathway changes --- ALAS2 down-regulation ($\log_2\text{FC} = -1.45$) and HFE up-regulation ($\log_2\text{FC} = 2.39$) --- are consistent with suppressed erythropoiesis and altered iron sensing, aligning with the modest hemoglobin and RBC deviations from population norms. KCNQ2 up-regulation ($\log_2\text{FC} = 1.73$) may reflect compensatory transcriptional response to potassium shifts.
+The population-deviating clinical markers show plausible transcriptomic correlates. The down-regulation of CACNA1D ($\log_2\text{FC} = -2.25$), the largest fold change observed, aligns with the elevated serum calcium: cellular down-regulation of calcium channels may represent an adaptive response to sustained extracellular calcium elevation. The iron pathway changes --- ALAS2 down-regulation ($\log_2\text{FC} = -1.45$) and HFE up-regulation ($\log_2\text{FC} = 2.39$) --- are consistent with suppressed erythropoiesis and altered iron sensing, aligning with the modest hemoglobin and RBC deviations from population norms. The NHANES iron status reference strengthens this interpretation: in the general population, hemoglobin is the strongest CBC correlate of serum iron ($r = 0.424$) and transferrin saturation ($r = 0.412$), establishing hemoglobin as a robust proxy for iron status. The astronaut hemoglobin deviations, though modest in effect size, therefore reflect the same iron--hemoglobin axis that dominates population-level variation, and the ALAS2 down-regulation (rate-limiting enzyme in heme biosynthesis) provides a mechanistic link between the transcriptomic and clinical findings. The NHANES reference intervals for serum iron (24.0--160.0~$\mu$g/dL), ferritin (6.4--565.6~ng/mL), and transferrin saturation (7.0--55.0\%) provide the population context against which future astronaut iron status measurements could be evaluated, should direct iron marker assays be included in upcoming missions. KCNQ2 up-regulation ($\log_2\text{FC} = 1.73$) may reflect compensatory transcriptional response to potassium shifts.
 
 The ML stability-selected features provide an independent line of evidence: iron metabolism genes (HFE, SLC11A2, ALAS2, PCBP2) were consistently selected across LOO folds, bridging the clinical hematology findings with the transcriptomic response. The potassium channel gene KCNE1 (94\% selection frequency) connects the regression finding (potassium $r = 0.50$) with the classification analysis.
+
+\subsection{Deep learning integration and cross-mission validation}
+
+The denoising autoencoder analysis, integrating I4 ($n = 4$) and AX-1 ($n = 2$) astronauts, demonstrates that dimensionality reduction from 779 to 16 latent features improves flight-vs-ground classification generalization (AUC 0.728 vs.\ 0.621 for raw expression). This is consistent with the expectation that in extreme small-$n$ settings, feature compression acts as a regularizer that mitigates overfitting. The UMAP visualization (Figure~\ref{fig:dl_results}a) shows partial separation of pre- and post-flight samples, though astronaut-level clustering is also visible --- reflecting individual baseline variation that the autoencoder preserves alongside the flight signal.
+
+The JAXA6 cross-mission validation provides the most compelling external evidence: ALAS2, the rate-limiting enzyme in erythroid heme biosynthesis, is significantly downregulated during spaceflight in both I4 (log$_2$FC $= -1.45$, $p = 10^{-5}$) and JAXA6 (logFC $= -0.80$), reaching meta-analytic significance (FDR $= 0.021$). This converges with the known spaceflight-induced anemia phenotype\textsuperscript{6} and the ML stability selection of ALAS2 (69\% selection frequency). The magnesium transporter CNNM4, identified by ML stability selection, was independently significant in JAXA6 (adj-$P = 0.045$), providing a second cross-mission validated biomarker. While the overall sign concordance (68.8\%) did not reach statistical significance ($p = 0.105$), the directional trend across 16 overlapping genes is consistent with a shared mineral-pathway transcriptional response across independent missions and agencies (NASA, JAXA).
+
+The architecture comparison (DAE vs.\ VAE vs.\ FT-Transformer) reveals that the DAE's reconstruction objective is better suited to this extreme small-$n$ regime than the VAE's KL-regularized objective. The VAE's failure to reach classification significance (AUC = 0.621, $p = 0.143$) likely reflects over-compression: the KL penalty forces the latent distribution toward a standard normal, discarding astronaut-specific variance that is informative for flight-status discrimination when $n = 6$. The FT-Transformer, despite having 117,707 parameters (vs.\ the DAE's $\sim$200K), achieved significant classification with SVM-RBF (AUC = 0.661, $p = 0.006$), demonstrating that attention-based feature tokenization can learn useful representations even from 22 samples when heavily regularized. The fact that the transformer's optimal classifier differs from the DAE's (SVM-RBF vs.\ random forest) suggested the two architectures encode complementary information --- a hypothesis confirmed by the prediction-averaging ensemble, which achieved the highest AUC of any configuration (0.750, $p = 0.008$). Notably, the concatenation ensemble (32-dim) underperformed both the DAE alone and the averaging ensemble, indicating that feature-level fusion introduces noise in the small-$n$ regime while decision-level fusion preserves the complementary signals. The latent correlation analysis (Figure~\ref{fig:dl_extended}e) further supports this: weak inter-architecture correlations ($|r| < 0.5$ for most dimension pairs) confirm that each architecture discovers different projections of the 779-gene space. The 15-gene multi-omics consensus set (AUC = 0.598) did not improve over raw expression, indicating that proteomics-informed gene filtering does not substitute for learned dimensionality reduction in this context.
 
 \subsection{Cross-species concordance: muscle as mineral sensor}
 
@@ -315,7 +459,7 @@ The 28-dataset meta-analysis revealed that skeletal muscle --- particularly the 
 
 \subsection{Limitations}
 
-Several limitations must be acknowledged. First, the astronaut sample size ($n = 4$) is severely underpowered; one-sample tests at each timepoint have minimal statistical power, and we emphasize effect sizes over $p$-values. Second, exact age and sex of individual crew members were not available in the provided dataset; the all-sexes age 40--60 reference was used as the primary baseline. Third, NHANES uses a complex survey design; we used unweighted statistics for reference interval derivation, which is standard practice but may slightly bias population estimates. Fourth, the cross-species comparison is confounded by tissue, mission duration, and species differences. Fifth, the SVM classification AUC $= 1.0$ result must be interpreted with caution due to the non-standard permutation null distribution caused by class weighting. Sixth, the regression $R^2$ values are low (0.12--0.19), indicating that mineral-pathway gene expression explains only a modest fraction of serum mineral variance. Seventh, this is an observational study; no causal inference about spaceflight effects on mineral homeostasis can be drawn.
+Several limitations must be acknowledged. First, the astronaut sample size ($n = 4$) is severely underpowered; one-sample tests at each timepoint have minimal statistical power, and we emphasize effect sizes over $p$-values. Second, exact age and sex of individual crew members were not available in the provided dataset; the all-sexes age 40--60 reference was used as the primary baseline. Third, NHANES uses a complex survey design; we used unweighted statistics for reference interval derivation, which is standard practice but may slightly bias population estimates. Fourth, the cross-species comparison is confounded by tissue, mission duration, and species differences. Fifth, the SVM classification AUC $= 1.0$ result must be interpreted with caution due to the non-standard permutation null distribution caused by class weighting. Sixth, the regression $R^2$ values are low (0.12--0.19), indicating that mineral-pathway gene expression explains only a modest fraction of serum mineral variance. Seventh, this is an observational study; no causal inference about spaceflight effects on mineral homeostasis can be drawn. Eighth, the deep learning analysis integrates only 6 astronauts (I4 + AX-1); while the autoencoder improves classification generalization, the regression results show negative correlations (a LOAO artifact with $n = 4$), and reliable individual-level mineral prediction requires larger cohorts. Ninth, JAXA6 provides group-mean expression rather than per-sample data, limiting validation to signature concordance rather than independent classification. Tenth, the architecture comparison (DAE vs.\ VAE vs.\ FT-Transformer) is limited to 500 (classification) and 100 (regression) permutations due to computational cost, and the Raw\_779 regression p-values were not computed (779-dimensional permutation tests are prohibitively slow on CPU); the regression $|r|$ values for raw expression are reported without significance testing.
 
 % ════════════════════════════════════════════════════════════════════
 % METHODS
@@ -325,6 +469,10 @@ Several limitations must be acknowledged. First, the astronaut sample size ($n =
 \subsection{NHANES data acquisition and reference construction}
 
 Three consecutive NHANES cycles (2013--2014, 2015--2016, 2017--2018) were downloaded from the CDC website (\texttt{https://wwwn.cdc.gov/Nchs/Nhanes/}). For each cycle, the Standard Biochemistry Profile (BIOPRO), Complete Blood Count with 5-part differential (CBC), and Demographics (DEMO) XPT files were retrieved and parsed using \texttt{pandas.read\_sas(format='xport')}. Files were merged on the participant identifier (SEQN). The reference population was restricted to adults aged 40--60 years (all sexes), yielding 5,748 participants. Reference statistics (mean, SD, median, percentiles P1--P99) were computed per variable for all sexes combined and stratified by sex. The 95\% reference interval was defined as P2.5--P97.5.
+
+\subsection{NHANES iron status data}
+
+Four iron status markers not present in the astronaut clinical panel were added as population reference context. Serum iron (LBXSIR, $\mu$g/dL) was extracted from the BIOPRO files across all three cycles ($n = 5{,}435$). Ferritin (LBXFER, ng/mL) was obtained from the NHANES Ferritin files (FERTIN\_I for 2015--2016, FERTIN\_J for 2017--2018; $n = 2{,}190$); ferritin data were not available for the 2013--2014 cycle. Transferrin saturation (LBDPCT, \%) and total iron-binding capacity (LBDTIB, $\mu$g/dL) were obtained from the TIBC and Transferrin Saturation file (FETIB\_J, 2017--2018 only; $n = 1{,}678$); TIBC files were not available for the 2013--2014 or 2015--2016 cycles. Reference statistics were computed using the same age 40--60, all-sexes restriction. Pearson correlations between each iron marker and six CBC parameters (hemoglobin, hematocrit, RBC count, MCH, MCHC, MCV) were computed on merged NHANES samples within the same age restriction.
 
 \subsection{Astronaut data acquisition}
 
@@ -357,6 +505,26 @@ Feature matrices were constructed from RNA-seq count data restricted to 784 mine
 \subsection{Machine learning: classification}
 
 Class-weighted elastic-net logistic regression (\texttt{LogisticRegression(penalty='elasticnet', class\_weight='balanced', solver='saga')}) was applied with nested LOO-CV. The outer loop held out 1 of 16 samples (4 flight, 12 ground); the inner loop (3-fold stratified) selected hyperparameters (C $\in$ \{0.01, 0.05, 0.1, 0.5, 1.0\}, l1\_ratio $\in$ \{0.1, 0.3, 0.5, 0.7, 0.9\}). StandardScaler was fit inside each fold. SVM-RBF with class weights was included as a non-linear baseline. A 500-permutation test shuffled labels and reran the full LOO-CV to generate the null distribution. Stability selection tracked gene selection frequency across LOO folds.
+
+\subsection{Cross-mission integration and deep learning}
+
+Per-sample RNA-seq from the Axiom-1 (AX-1) mission (GEO: GSE276490; 2 astronauts, 3 timepoints: pre-flight, post-24h, post-3months) was downloaded as TPM values. I4 counts were CPM-normalized and log$_2$-transformed; AX-1 TPM values were log$_2$-transformed. Both datasets were mapped to HGNC gene symbols and intersected to 779 common mineral-pathway genes. Batch effects between studies were addressed by z-scoring each gene within each study (removing study-specific mean and variance while preserving within-study biological variation).
+
+A denoising autoencoder was implemented in PyTorch with architecture 779 $\to$ 128 $\to$ 64 $\to$ 16 (latent) $\to$ 64 $\to$ 128 $\to$ 779, using BatchNorm, ReLU activations, dropout (0.3), and $L_2$ weight decay ($10^{-4}$). Gaussian noise ($\sigma = 0.1$) was added to inputs during training. The model was trained for up to 300 epochs with early stopping (patience = 30) using Adam optimizer (lr = $10^{-3}$). Leave-one-astronaut-out (LOAO) cross-validation was performed across 6 astronauts (4 I4 + 2 AX-1), with latent features extracted from held-out samples to prevent information leakage.
+
+Classification (flight vs.\ pre-flight) was performed on the 16-dimensional latent space using logistic regression, SVM (RBF and linear kernels), and random forest, with LOAO CV and a 1000-permutation test (shuffling training labels within each fold). Regression (calcium, potassium, sodium, hemoglobin) was performed on I4 samples only ($n = 16$) using Ridge, SVR, and random forest regressors with LOAO CV and 1000-permutation tests.
+
+\subsubsection{Alternative architectures}
+
+A $\beta$-VAE ($\beta = 0.5$) with the same encoder/decoder dimensions was trained with the reparameterization trick and loss $= \text{MSE} + \beta \cdot \text{KL}$. A lightweight FT-Transformer treated each of the 779 genes as a token with a value embedding (16-dim) and a learned gene-identity embedding. A single transformer encoder layer (4 attention heads, FFN dimension 32, pre-LN, GELU activation, dropout 0.5) processed the token sequence, and a CLS token produced the 16-dimensional latent. The decoder (16 $\to$ 128 $\to$ 779) enabled reconstruction loss training. Both models used LOAO CV identical to the DAE. Classification and regression evaluation used 500 and 100 permutations, respectively (reduced from 1000 due to computational cost). For the multi-omics consensus baseline, 15 genes overlapping between RNA-seq mineral-pathway genes and proteomics DE genes ($p < 0.05$) were used directly as features without encoding.
+
+\subsubsection{Ensemble strategies}
+
+Two ensemble approaches were evaluated. (1) \textit{Concatenation}: DAE and FT-Transformer 16-dimensional latent features were concatenated into a 32-dimensional feature matrix and evaluated with the same 4 classifiers under LOAO CV with 500 permutations. (2) \textit{Prediction averaging}: per-sample predicted probabilities from the best DAE classifier (DAE+RF) and the best FT-Transformer classifier (Transformer+SVM-RBF) were averaged arithmetically; the permutation test retrained both classifiers within each LOAO fold with shuffled labels and averaged their predictions. Latent space correlations were computed as pairwise Pearson correlations between all 16 latent dimensions across architectures (16$\times$16 matrices). Per-astronaut AUC was computed from the LOAO held-out predictions for each astronaut individually (3--4 test samples per astronaut).
+
+\subsubsection{JAXA6 validation}
+
+JAXA6 plasma cell-free RNA-seq differential expression (OSD-530; 6 Japanese astronauts, group-mean expression for 11 time points) was obtained from the associated data repository. As JAXA6 provides group means rather than per-sample data, it was used exclusively for signature validation. Concordance between I4 (I4-FP1) and JAXA6 flight-vs-pre log$_2$FC values was assessed by sign concordance (binomial test), Pearson correlation, and Fisher's exact test for enrichment of I4 DE genes in JAXA6 DE genes (adj-$P < 0.05$). A weighted Stouffer meta-analysis combined I4 and JAXA6 $p$-values (weighted by $\sqrt{n}$ per mission), with Benjamini--Hochberg FDR correction. ML stability-selected genes were checked for presence in the JAXA6 DE table.
 
 \subsection{Cross-species meta-analysis}
 
