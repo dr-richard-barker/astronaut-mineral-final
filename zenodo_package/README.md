@@ -98,9 +98,10 @@ Run order and details: `code/reconstructed/RECONSTRUCTION_NOTE.md`.
 7. **Deep learning:**
    - The DAE latent space improves flight vs pre-flight classification (AUC 0.728 vs 0.621 for
      raw expression).
-   - The DAE + Transformer prediction-averaging ensemble reaches AUC 0.750.
-   - In retraining with the reconstructed code, the DAE result holds (AUC ≈ 0.72). The
-     Transformer and ensemble results were not reproduced; see
+   - This DAE result holds when the models are retrained with the reconstructed code
+     (AUC ≈ 0.72).
+   - The original run also reported a Transformer + SVM-RBF AUC of 0.661 and a DAE + Transformer
+     ensemble AUC of 0.750. Neither was reproduced on retraining, so both are unconfirmed; see
      `code/reconstructed/FIDELITY.md`.
 8. **Cross-species:** across 28 rodent datasets, mineral-pathway concordance is significant in
    skeletal muscle (pooled r = 0.035, p = 0.0025), strongest in soleus (r = 0.059, p = 0.009).
