@@ -39,6 +39,50 @@
 | `rodent_liver_de_human_mapped.csv` | Rodent liver DE with human ortholog mapping |
 | `cross_species_concordance.csv` | Cross-species concordance analysis results |
 
+## Cross-mission, deep-learning, JAXA6 and NHANES-iron outputs (`data/`)
+
+These are outputs of the original analysis. The scripts that produced them were lost and are
+reconstructed in `code/reconstructed/` (see `FIDELITY.md` there).
+
+**Inputs**
+
+| File | Description |
+|------|-------------|
+| `harmonized_astronaut_expression.csv` | 779 mineral-pathway genes × 22 samples (I4 log2 CPM; AX-1 log2 TPM) |
+| `harmonized_expression_zscore.csv` | Same matrix, z-scored per gene within each study; the DL input |
+| `harmonized_astronaut_metadata.csv` | Per sample: study, astronaut ID, time point, flight status, tissue |
+| `harmonized_expression_multiomics_filtered.csv` | 15-gene multi-omics consensus subset × 22 samples |
+| `multiomics_consensus_genes.csv` | The 15 consensus genes (RNA-seq mineral genes ∩ proteomics p < 0.05) |
+
+**Latent features and training losses**
+
+| File | Description |
+|------|-------------|
+| `autoencoder_latent_features.csv`, `vae_latent_features.csv`, `transformer_latent_features.csv` | 16-dim latents; each astronaut encoded by the leave-one-astronaut-out (LOAO) model that did not see them |
+| `*_latent_features_final.csv` | 16-dim latents from the model trained on all 22 samples |
+| `autoencoder_recon_losses.csv`, `vae_recon_losses.csv`, `transformer_recon_losses.csv` | Best training loss per LOAO fold, plus the all-data model (`ALL`) |
+
+**Classification and regression results**
+
+| File | Description |
+|------|-------------|
+| `dl_classification_results.csv` | Flight vs pre-flight: pooled AUC, fold AUCs, accuracy, F1, permutation null and p (DAE latent vs 779 genes) |
+| `dl_classification_roc_data.csv` | Out-of-fold predicted probabilities behind the classification results |
+| `dl_regression_results.csv` | Serum Ca, K, Na and hemoglobin regression: r, ρ, R², MAE, permutation p (I4, 16 samples) |
+| `dl_regression_predictions.csv` | Out-of-fold predictions behind the regression results |
+| `dl_extended_classification_results.csv` | Classification across DAE / VAE / Transformer / Raw_779 / Multiomics_15 and both ensembles |
+| `dl_extended_regression_results.csv` | Regression across the five feature spaces (p-values for the latent spaces only) |
+| `dl_extended_roc_data.csv` | Out-of-fold probabilities for the extended comparison and ensembles |
+
+**JAXA6 and NHANES iron**
+
+| File | Description |
+|------|-------------|
+| `jaxa6_concordance_table.csv` | 16 genes in both I4-FP1 DE and JAXA6: log fold changes, directions, concordance |
+| `jaxa6_stouffer_meta.csv` | √n-weighted Stouffer meta-analysis of I4 and JAXA6 p-values (13 genes) with BH-FDR |
+| `jaxa6_validation_results.csv` | Summary statistics: concordance, binomial, Pearson, Spearman, Fisher, meta-analysis counts |
+| `nhanes_iron_cbc_correlations.csv` | 24 Pearson correlations, 4 iron markers × 6 CBC parameters (NHANES, age 40–60) |
+
 ## Column Descriptions
 
 ### `astronaut_minerals_combined.csv`

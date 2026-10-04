@@ -1,8 +1,9 @@
-.DS_Store
 *.pyc
-__pycache__/
+.DS_Store
+.abai/
 .venv/
+__pycache__/
 manuscript/*.aux
 manuscript/*.log
 manuscript/*.out
-.abai/
+zenodo_package/reproduced/
